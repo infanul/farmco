@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+@theme {
+  /* CLEAN LIGHT AGRITECH SAAS PALETTE */
+  --color-agri-bg: #ffffff;
+  --color-agri-surface: #f1f8e9;
+  --color-agri-card: #f9fbe7;
+  --color-agri-border: #c8e6c9;
+  --color-agri-primary: #2e7d32;
+  --color-agri-hover: #1b5e20;
+  --color-agri-secondary: #8bc34a;
+  --color-agri-text: #1a1a1a;
+  --color-agri-muted: #555555;
+}
+
+/* Global Reset & Base Styles */
+:root {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark body {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+/* Clean Flat Card Utility Classes */
+.agri-card {
+  background-color: #f1f8e9;
+  border: 1px solid #c8e6c9;
+  border-radius: 1.5rem;
+  color: #1a1a1a;
+}
+
+html.dark .agri-card {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+.agri-panel {
+  background-color: #ffffff;
+  border: 1px solid #dcedc8;
+  border-radius: 1.5rem;
+  color: #1a1a1a;
+}
+
+html.dark .agri-panel {
+  background-color: #0f172a;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+/* Status Indicator Utilities */
+.status-open {
+  background-color: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  color: #2e7d32;
+}
+
+html.dark .status-open {
+  background-color: #064e3b;
+  border-color: #047857;
+  color: #a7f3d0;
+}
+
+.status-delayed {
+  background-color: #fff8e1;
+  border: 1px solid #ffe082;
+  color: #f57f17;
+}
+
+html.dark .status-delayed {
+  background-color: #78350f;
+  border-color: #b45309;
+  color: #fef08a;
+}
+
+.status-closed {
+  background-color: #ffebee;
+  border: 1px solid #ffcdd2;
+  color: #c62828;
+}
+
+html.dark .status-closed {
+  background-color: #7f1d1d;
+  border-color: #b91c1c;
+  color: #fecaca;
+}
+
+.status-info {
+  background-color: #e3f2fd;
+  border: 1px solid #bbdefb;
+  color: #1565c0;
+}
+
+html.dark .status-info {
+  background-color: #1e3a8a;
+  border-color: #1d4ed8;
+  color: #bfdbfe;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f8e9;
+}
+html.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+::-webkit-scrollbar-thumb {
+  background: #a5d6a7;
+  border-radius: 4px;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2e7d32;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #059669;
+}
+
+/* Print styles for printed tokens */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-token, #printable-token * {
+    visibility: visible;
+  }
+  #printable-token {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    color: #1a1a1a;
+    background: #ffffff;
+    padding: 20px;
+    border: 2px solid #2e7d32;
+  }
+}
