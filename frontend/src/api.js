@@ -41,6 +41,11 @@ export const api = {
     return res.json();
   },
 
+  getFarmerNotifications: async (phone, centerId) => {
+    const res = await fetch(`${API_BASE}/centers/farmer-notifications?phone=${encodeURIComponent(phone || '')}&center_id=${centerId || 1}`);
+    return res.json();
+  },
+
   // Bookings & Slots
   getCrops: async () => {
     const res = await fetch(`${API_BASE}/bookings/crops`);

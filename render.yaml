@@ -5,6 +5,9 @@ services:
     rootDir: backend
     buildCommand: npm install
     startCommand: npm start
+    healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
+      - key: FRONTEND_URL
+        sync: false

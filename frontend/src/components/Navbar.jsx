@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   Sprout, Sun, Moon, User, ShieldCheck, Menu, X, ChevronDown, 
   Home, Wheat, TrendingUp, Calendar, Clock, Search, UserCheck, 
-  Monitor, LogOut, PhoneCall
+  Monitor, LogOut, PhoneCall, LineChart
 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import FarmerNotificationBell from './FarmerNotificationBell';
 
 export default function Navbar({
   activeTab,
@@ -52,6 +53,7 @@ export default function Navbar({
     { key: 'book-slot', label: 'Book Slot', icon: Calendar },
     { key: 'calendar', label: 'Booking Calendar', icon: Clock },
     { key: 'track-booking', label: 'Track Booking', icon: Search },
+    { key: 'ai-analyze', label: 'AI Analyze', icon: LineChart },
     { key: 'assistance', label: 'Assistance Desk', icon: UserCheck },
     { key: 'ivr', label: 'Voice / IVR', icon: PhoneCall }
   ];
@@ -194,6 +196,12 @@ export default function Navbar({
                 </button>
               </div>
 
+              {/* Notification Bell (Farmer Portal) */}
+              <FarmerNotificationBell 
+                currentUser={currentUser} 
+                isDark={isDark} 
+              />
+
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
@@ -308,6 +316,14 @@ export default function Navbar({
           </div>
 
           <div className="flex items-center space-x-2">
+            {!isAdminView && (
+              <FarmerNotificationBell 
+                currentUser={currentUser} 
+                isDark={isDark}
+                isMobile={true} 
+              />
+            )}
+
             <button
               onClick={toggleTheme}
               className={`w-8 h-8 rounded-xl border flex items-center justify-center ${

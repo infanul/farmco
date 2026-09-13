@@ -92,6 +92,28 @@ router.post('/:id/status', (req, res) => {
   });
 });
 
+// GET FARMER-SPECIFIC NOTIFICATIONS (Filtered by phone or center)
+router.get('/farmer-notifications', (req, res) => {
+  const { phone, center_id } = req.query;
+  let sql = `SELECT * FROM notifications WHERE 1=1`;
+  const params = [];
+
+  if (phone) {
+    sql += ` AND (farmer_phone = ? OR farmer_phone = 'all' OR farmer_phone IS NULL OR center_id = ?)`;
+    params.push(phone, center_id || 1);
+  } else if (center_id) {
+    sql += ` AND center_id = ?`;
+    params.push(center_id);
+  }
+
+  sql += ` ORDER BY id DESC LIMIT 30`;
+
+  db.all(sql, params, (err, notifications) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ notifications: notifications || [] });
+  });
+});
+
 // GET NOTIFICATION AUDIT LOGS FOR A CENTER
 router.get('/:id/notifications', (req, res) => {
   const centerId = req.params.id;

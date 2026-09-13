@@ -20,6 +20,7 @@ import AdminLoginView from './views/AdminLoginView';
 import AssistanceDeskView from './views/AssistanceDeskView';
 import IVRPhoneSimulator from './views/IVRPhoneSimulator';
 import SmartKioskView from './views/SmartKioskView';
+import AIAnalyzeView from './views/AIAnalyzeView';
 import AdminUserSearch from './components/AdminUserSearch';
 import AdminTotalsDashboard from './components/AdminTotalsDashboard';
 
@@ -205,6 +206,13 @@ export default function App() {
                 />
               )}
 
+              {activeTab === 'ai-analyze' && (
+                <AIAnalyzeView
+                  currentUser={currentUser}
+                  onNavigate={(tab) => setActiveTab(tab)}
+                />
+              )}
+
               {activeTab === 'admin-user-search' && (
                 isAdminRole ? (
                   <AdminUserSearch />
@@ -259,8 +267,8 @@ export default function App() {
           )}
         </main>
 
-        {/* Floating AI Queue Forecast Drawer (Admin & Analytics view) */}
-        {activeTab === 'staff' && (
+        {/* Floating AI Queue Forecast Drawer (Farmer Portal) */}
+        {!isAdminView && !isLoginPage && (
           <AIFloatingAssistantDrawer selectedCenterId={currentUser?.center_id || 1} />
         )}
 

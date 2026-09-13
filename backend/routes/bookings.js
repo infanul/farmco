@@ -224,8 +224,12 @@ router.patch('/:id/procurement-status', (req, res) => {
       (getErr, booking) => {
         if (getErr || !booking) return res.status(404).json({ error: 'Booking not found' });
 
-        // Notify farmer on status progression
-        const msg = `Status Update for Token ${booking.token_number}: Procurement stage is now [${procurement_status}]. Center: ${booking.center_name}.`;
+        // Notify farmer on status progression or fault
+        let msg = `Status Update for Token ${booking.token_number}: Procurement stage is now [${procurement_status}]. Center: ${booking.center_name}.`;
+        if (procurement_status === 'Rejected') {
+          msg = `We noticed an issue during your procurement process for Token ${booking.token_number} (${rejection_reason || 'Quality Verification'}). It may be delayed — please check your status for updates.`;
+        }
+
         notificationService.send({
           centerId: booking.center_id,
           phone: booking.farmer_phone,
